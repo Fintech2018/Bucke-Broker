@@ -6,7 +6,7 @@ $(document).ready(function () {
         fire_ajax_fileUpload_submit();
         $('#positivefeedbackLoadResult').text("");
         $('#negativefeedbackLoadResult').text("");
-        $('#neutralfeedbackLoadResult').text("");
+//        $('#neutralfeedbackLoadResult').text("");
         $("#feedbackLoadResult").text("");
     });
     
@@ -23,7 +23,8 @@ $(document).ready(function () {
     $("#btnFeedbackSubmitPositive").click(function (event) {
         event.preventDefault();
         $("#btnFeedbackSubmitPositive").prop("disabled", true);
-        var url="/broker/storage/uploadFile/positive";
+        // var url="/broker/storage/uploadFile/positive";
+        var url= "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/positive?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
         generateFeedbackBySystem(url,"positive");
         $("#btnFeedbackSubmitPositive").prop("disabled", false);
         $('#negativefeedbackLoadResult').text("");
@@ -34,7 +35,9 @@ $(document).ready(function () {
     $("#btnFeedbackSubmitNegative").click(function (event) {
         event.preventDefault();
         $("#btnFeedbackSubmitNegative").prop("disabled", true);
-        var url="/broker/storage/uploadFile/negative";
+       //= var url="/broker/storage/uploadFile/negative";
+        var url = "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/negative?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
+        		
         generateFeedbackBySystem(url,"negative");
         $("#btnFeedbackSubmitNegative").prop("disabled", false);
         $('#positivefeedbackLoadResult').text("");
@@ -45,7 +48,10 @@ $(document).ready(function () {
     $("#btnFeedbackSubmitNeutral").click(function (event) {
         event.preventDefault();
         $("#btnFeedbackSubmitNeutral").prop("disabled", true);
-        var url="/broker/storage/uploadFile/neutral";
+        //var url="/broker/storage/uploadFile/neutral";
+        var url = "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/neutral?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
+        
+        
         generateFeedbackBySystem(url,"neutral");
         $("#btnFeedbackSubmitNeutral").prop("disabled", false);
         $('#negativefeedbackLoadResult').text("");
@@ -71,7 +77,8 @@ function fire_ajax_fileUpload_submit() {
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "/broker/storage/uploadFile/feedbackFile",
+       // url: "/broker/storage/uploadFile/feedbackFile",
+        url : "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/feedbackFile?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
         data: data,
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
@@ -107,7 +114,8 @@ function fire_ajax_fileUpload_submit() {
         $("#btnFeedbackSubmit").prop("disabled", true);
         $.ajax({
             type: "POST",
-            url: "/broker/storage/uploadFile/feedback",
+            // url: "/broker/storage/uploadFile/feedback",
+            url : "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/feedback?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
             data:$('form[name=feedbackUploadForm]').serialize(), 
             timeout: 600000,
             success: function (data) {
