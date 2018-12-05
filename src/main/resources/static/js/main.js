@@ -188,3 +188,65 @@ function fire_ajax_fileUpload_submit() {
                }
            });
     }
+    
+    
+    
+    
+    
+    $("#syncTwitter").click(function (event) {
+    	debugger;
+        event.preventDefault();
+        messageBox('Twitter Syncing will take some time, Stay tuned!', 'info', { okButtonName: 'Ok'}, function () {
+        	
+        });
+        $.ajax({
+            type: "GET",
+            url: "/broker/storage/sync_twitter",
+            success: function (data) {
+         	   if(data=="Success"){
+                    console.log("SUCCESS : ", data);
+                    messageBox('Twitter Syncing completed!', 'info', { okButtonName: 'Close'}, function () {
+                    	
+                    });
+         	   }else{
+         		  messageBox(data, 'info', { okButtonName: 'Close'}, function () {
+                    	
+                  });
+         	   }
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+                messageBox('Failed to Sync Twitter!', 'info', { okButtonName: 'Close'}, function () {
+                });
+            }
+        });
+    });
+    
+    $("#syncEmail").click(function (event) {
+        event.preventDefault();
+        messageBox('Email Syncing will take some time, Stay tuned!', 'info', { okButtonName: 'Ok'}, function () {
+        	
+        });
+        $.ajax({
+            type: "GET",
+            url: "/broker/storage/sync_email",
+            success: function (data) {
+         	   if(data=="Success"){
+                    console.log("SUCCESS : ", data);
+                    messageBox('Email Syncing completed!', 'info', { okButtonName: 'Close'}, function () {
+                    	
+                    });
+         	   }else{
+         		  messageBox(data, 'info', { okButtonName: 'Close'}, function () {
+                  	
+                  });
+         	   }
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+                messageBox('Failed to Sync Email!', 'info', { okButtonName: 'Close'}, function () {
+                });
+            }
+        });
+    });
+

@@ -2,7 +2,6 @@ package com.bucketbroker.service.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -120,6 +119,49 @@ public class S3BucketLoaderService implements BrokerService {
    		 feedbackFile.deleteOnExit();
 	   	 writer = new OutputStreamWriter(new FileOutputStream(feedbackFile));
 	     writer.write(feedbackToLoad);
+	     writer.close();
+   		 System.out.println("Uploading a new object to S3 from a file\n");
+            s3.putObject(new PutObjectRequest(bucketName, key, feedbackFile));
+            
+   	 }  catch (AmazonServiceException ase) {
+            System.out.println("Caught an AmazonServiceException, which means your request made it "
+                    + "to Amazon S3, but was rejected with an error response for some reason.");
+            System.out.println("Error Message:    " + ase.getMessage());
+            System.out.println("HTTP Status Code: " + ase.getStatusCode());
+            System.out.println("AWS Error Code:   " + ase.getErrorCode());
+            System.out.println("Error Type:       " + ase.getErrorType());
+            System.out.println("Request ID:       " + ase.getRequestId());
+            return "Failure";
+        } catch (AmazonClientException ace) {
+            System.out.println("Caught an AmazonClientException, which means the client encountered "
+                    + "a serious internal problem while trying to communicate with S3, "
+                    + "such as not being able to access the network.");
+            System.out.println("Error Message: " + ace.getMessage());
+            return "Failure";
+        } catch(Exception ex) {
+       	 System.out.println("Caught an Exception, which meanssome exception occurred while performing upload");
+            System.out.println("Error Message: " + ex.getMessage());
+            return "Failure";
+        }finally {
+        	if(writer!=null) {
+        		writer.close();
+        	}
+        }
+   		return "Success";
+   	}
+    
+    @Override
+   	public String loadFeedToS3(String feedbackToLoad,String source) throws IOException {
+    	Writer writer=null;
+   	try {
+   		 AmazonS3 s3=CredentialUtility.getAWSS3Client();
+   		 String key = "Usr_feed_sampl"+ UUID.randomUUID();
+   		 
+   		//Create File object to load
+   		 File feedbackFile=File.createTempFile("aws-java-sdk-", ".txt");
+   		 feedbackFile.deleteOnExit();
+	   	 writer = new OutputStreamWriter(new FileOutputStream(feedbackFile));
+	     writer.write(source+"\n"+feedbackToLoad);
 	     writer.close();
    		 System.out.println("Uploading a new object to S3 from a file\n");
             s3.putObject(new PutObjectRequest(bucketName, key, feedbackFile));

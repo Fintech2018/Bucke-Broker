@@ -11,4 +11,6 @@ public interface BrokerService {
 
 	String loadFeedbackToS3(String feedbackToLoad) throws IOException;
 
+	String loadFeedToS3(String feedbackToLoad, String source) throws IOException;
+
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bucketbroker.email.EmailManager;
 import com.bucketbroker.service.intf.BrokerService;
+import com.bucketbroker.twitter.TweetManager;
 
 @RestController
 @RequestMapping("/broker/storage/")
@@ -59,5 +62,41 @@ public class BucketController {
 	public String uploadFileToS3(@RequestParam("feedback") String userFeedback) throws IOException {
 		log.info("In feedback upload to S3 controller..");
 		return brokerService.loadFeedbackToS3(userFeedback);
+	}
+	
+	@GetMapping("/sync_twitter")
+	public String syncTwitter() {
+		log.info("In sync twitter controller....");
+		List<String> tweets=TweetManager.getTweets("BBH");
+		if(tweets!=null && tweets.isEmpty()) {
+			return "No New Tweets Found For BBH";
+		}
+		  for(String feedback:tweets) {
+			//  try {
+				 // brokerService.loadFeedToS3(feedback,"source is Twitter");
+				  System.out.println(feedback);
+			//} catch (IOException e) {
+			//	log.error("Exception while processing tweets for upload",e.getMessage());
+			//}
+		  }
+		  return "Success";
+	}
+	
+	@GetMapping("/sync_email")
+	public String syncEmail() {
+		log.info("In sync email controller....");
+		List<String> emails=EmailManager.syncEmail();
+		if(emails!=null && emails.isEmpty()) {
+			return "No New Email Found For BBH";
+		}
+		  for(String feedback:emails) {
+			//  try {
+				//  brokerService.loadFeedToS3(feedback,"source is Email");
+				  System.out.println(feedback);
+			//} catch (IOException e) {
+			//	log.error("Exception while processing tweets for upload",e.getMessage());
+			//}
+		  }
+		  return "Success";
 	}
 }
