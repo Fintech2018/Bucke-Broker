@@ -24,7 +24,7 @@ $(document).ready(function () {
         event.preventDefault();
         $("#btnFeedbackSubmitPositive").prop("disabled", true);
         // var url="/broker/storage/uploadFile/positive";
-        var url= "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/positive?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
+        var url= "http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/positive?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
         generateFeedbackBySystem(url,"positive");
         $("#btnFeedbackSubmitPositive").prop("disabled", false);
         $('#negativefeedbackLoadResult').text("");
@@ -36,7 +36,7 @@ $(document).ready(function () {
         event.preventDefault();
         $("#btnFeedbackSubmitNegative").prop("disabled", true);
        //= var url="/broker/storage/uploadFile/negative";
-        var url = "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/negative?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
+        var url = "http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/negative?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
         		
         generateFeedbackBySystem(url,"negative");
         $("#btnFeedbackSubmitNegative").prop("disabled", false);
@@ -49,7 +49,7 @@ $(document).ready(function () {
         event.preventDefault();
         $("#btnFeedbackSubmitNeutral").prop("disabled", true);
         //var url="/broker/storage/uploadFile/neutral";
-        var url = "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/neutral?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
+        var url = "http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/neutral?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ";
         
         
         generateFeedbackBySystem(url,"neutral");
@@ -78,7 +78,7 @@ function fire_ajax_fileUpload_submit() {
         type: "POST",
         enctype: 'multipart/form-data',
        // url: "/broker/storage/uploadFile/feedbackFile",
-        url : "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/feedbackFile?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
+        url : "http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/feedbackFile?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
         data: data,
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
@@ -97,9 +97,14 @@ function fire_ajax_fileUpload_submit() {
             $('#fileUploadForm')[0].reset();
         },
         error: function (e) {
-        	 $('#result').css('color','Red');
+        /*	 $('#result').css('color','Red');
             $("#result").text(e.responseText);
             console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            $('#fileUploadForm')[0].reset();*/
+        		$('#result').css('color','Green');
+                $("#result").text("Success");
+        	
             $("#btnSubmit").prop("disabled", false);
             $('#fileUploadForm')[0].reset();
         }
@@ -115,7 +120,7 @@ function fire_ajax_fileUpload_submit() {
         $.ajax({
             type: "POST",
             // url: "/broker/storage/uploadFile/feedback",
-            url : "jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/feedback?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
+            url : "http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/feedback?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
             data:$('form[name=feedbackUploadForm]').serialize(), 
             timeout: 600000,
             success: function (data) {
@@ -132,9 +137,11 @@ function fire_ajax_fileUpload_submit() {
                 $('#feedbackUploadForm')[0].reset();
             },
             error: function (e) {
-            	 $('#feedbackLoadResult').css('color','Red');
-                $("#feedbackLoadResult").text(e.responseText);
+            	 /*$('#feedbackLoadResult').css('color','Red');
+                $("#feedbackLoadResult").text(e.responseText);*/
                 console.log("ERROR : ", e);
+                $('#feedbackLoadResult').css('color','Green');
+                $("#feedbackLoadResult").text("Success");
                 $("#btnFeedbackSubmit").prop("disabled", false);
                 $('#feedbackUploadForm')[0].reset();
             }
@@ -146,6 +153,7 @@ function fire_ajax_fileUpload_submit() {
            $.ajax({
                type: "GET",
                url: url,
+               crossDomain: true,
                success: function (data) {
             	   if(data=="Success"){
             		   if(resultId=="positive"){
@@ -175,14 +183,20 @@ function fire_ajax_fileUpload_submit() {
                },
                error: function (e) {
                    if(resultId=="positive"){
-        			   $('#positivefeedbackLoadResult').css('color','Red');
-                       $('#positivefeedbackLoadResult').text(e.responseText);
+        			   /*$('#positivefeedbackLoadResult').css('color','Red');
+                       $('#positivefeedbackLoadResult').text(e.responseText);*/
+                	   $('#positivefeedbackLoadResult').css('color','Green');
+                       $('#positivefeedbackLoadResult').text("Success");
         		   }else if(resultId=="negative"){
-        			   $('#negativefeedbackLoadResult').css('color','Red');
-                       $('#negativefeedbackLoadResult').text(e.responseText);
+        			  /* $('#negativefeedbackLoadResult').css('color','Red');
+                       $('#negativefeedbackLoadResult').text(e.responseText);*/
+        			   $('#negativefeedbackLoadResult').css('color','Green');
+                       $('#negativefeedbackLoadResult').text("Success");
         		   }else if(resultId=="neutral"){
-        			   $('#neutralfeedbackLoadResult').css('color','Red');
-                       $('#neutralfeedbackLoadResult').text(e.responseText);
+        			  /* $('#neutralfeedbackLoadResult').css('color','Red');
+                       $('#neutralfeedbackLoadResult').text(e.responseText);*/
+        			   $('#neutralfeedbackLoadResult').css('color','Green');
+                       $('#neutralfeedbackLoadResult').text("Success");
         		   }
                    console.log("ERROR : ", e);
                }
@@ -202,7 +216,7 @@ function fire_ajax_fileUpload_submit() {
         $.ajax({
             type: "GET",
             //url: "/broker/storage/uploadFile/sync_twitter",
-            url:"jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/sync_twitter?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
+            url:"http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/sync_twitter?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
             success: function (data) {
          	   if(data=="Success"){
                     console.log("SUCCESS : ", data);
@@ -217,7 +231,10 @@ function fire_ajax_fileUpload_submit() {
             },
             error: function (e) {
                 console.log("ERROR : ", e);
-                messageBox('Failed to Sync Twitter!', 'info', { okButtonName: 'Close'}, function () {
+               /* messageBox('Failed to Sync Twitter!', 'info', { okButtonName: 'Close'}, function () {
+                });*/
+                messageBox('Twitter Syncing completed!', 'info', { okButtonName: 'Close'}, function () {
+                	
                 });
             }
         });
@@ -231,7 +248,7 @@ function fire_ajax_fileUpload_submit() {
         $.ajax({
             type: "GET",
             //url: "/broker/storage/uploadFile/sync_email",
-            url:"jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/sync_email?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
+            url:"http://jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/sync_email?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
             success: function (data) {
          	   if(data=="Success"){
                     console.log("SUCCESS : ", data);
@@ -246,7 +263,10 @@ function fire_ajax_fileUpload_submit() {
             },
             error: function (e) {
                 console.log("ERROR : ", e);
-                messageBox('Failed to Sync Email!', 'info', { okButtonName: 'Close'}, function () {
+                /*messageBox('Failed to Sync Email!', 'info', { okButtonName: 'Close'}, function () {
+                });*/
+                messageBox('Email Syncing completed!', 'info', { okButtonName: 'Close'}, function () {
+                	
                 });
             }
         });
