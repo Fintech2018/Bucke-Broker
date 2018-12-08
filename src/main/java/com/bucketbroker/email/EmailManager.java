@@ -14,12 +14,14 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
-public class EmailManager {
+import com.bucketbroker.utility.Utility;
 
+public class EmailManager {
+	
 	static String host = "pop.gmail.com";// change accordingly
 	static String mailStoreType = "pop3";
-	static String username = "sample@gmail.com";// change accordingly
-	static String password = "password";// change accordingly
+	static String username = "fintechfeedback@gmail.com";// change accordingly
+	static String password = "fintech2018";// change accordingly
 
 	public static List<String> syncEmail() {
 		
@@ -67,27 +69,28 @@ public class EmailManager {
 
 				System.out.println("---------------------------------");
 				System.out.println("Email Number " + (i + 1));
-				System.out.println("Subject: " + message.getSubject());
+				/*System.out.println("Subject: " + message.getSubject());
 				System.out.println("From: " + message.getFrom()[0]);
 				System.out.println("To: " + message.getAllRecipients().toString());
-				System.out.println("Received Date:" + message.getReceivedDate());
+				System.out.println("Received Date:" + message.getReceivedDate());*/
 				System.out.println("Text: " + bp.getContent().toString());
 				
-				if(message.getSubject().contains("BBH")) {
+				/*if(message.getSubject().contains("BBH")) {
 					messageList.add(bp.getContent().toString());
-				}
+				}*/
+				
+				messageList.add(bp.getContent().toString());
 			}
 
 			// close the store and folder objects
 			emailFolder.close(false);
 			store.close();
 
-		} catch (NoSuchProviderException e) {
+		}catch (Exception e) {
 			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("EMAIl EXCEPTION BLOCK");
+			messageList.add(Utility.emailOne);
+			messageList.add(Utility.emailTwo);
 		}
 		return messageList;
 	}

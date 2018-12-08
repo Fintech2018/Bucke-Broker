@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bucketbroker.email.EmailManager;
 import com.bucketbroker.service.intf.BrokerService;
 import com.bucketbroker.twitter.TweetManager;
+import com.bucketbroker.utility.Utility;
 
 @RestController
 @RequestMapping("/broker/storage/")
@@ -64,25 +65,39 @@ public class BucketController {
 		return brokerService.loadFeedbackToS3(userFeedback);
 	}
 	
-	@GetMapping("/sync_twitter")
+	@GetMapping("/uploadFile/sync_twitter")
 	public String syncTwitter() {
 		log.info("In sync twitter controller....");
-		List<String> tweets=TweetManager.getTweets("BBH");
+		List<String> tweets=TweetManager.getTweets("BBH PRIVATE BANKING");
 		if(tweets!=null && tweets.isEmpty()) {
 			return "No New Tweets Found For BBH";
 		}
+		int t=1;
+		String twitterHName;
 		  for(String feedback:tweets) {
-			//  try {
-				 // brokerService.loadFeedToS3(feedback,"source is Twitter");
-				  System.out.println(feedback);
-			//} catch (IOException e) {
-			//	log.error("Exception while processing tweets for upload",e.getMessage());
-			//}
+			  if(t==1) {
+				  twitterHName=Utility.twitterHeader1;
+			  }else if(t==2) {
+				  twitterHName=Utility.twitterHeader2;
+			  }else
+			  {
+				  twitterHName= Utility.twitterDefault;
+			  }
+			 
+			 try {
+				  brokerService.loadFeedToS3(feedback,twitterHName);
+			  System.out.println("Header Name feedback---->"+twitterHName);
+			  System.out.println("Twitter feedback---->"+feedback);
+			
+			} catch (IOException e) {
+				log.error("Exception while processing tweets for upload",e.getMessage());
+			}
+			  t++;
 		  }
 		  return "Success";
 	}
 	
-	@GetMapping("/sync_email")
+	@GetMapping("/uploadFile/sync_email")
 	public String syncEmail() {
 		log.info("In sync email controller....");
 		List<String> emails=EmailManager.syncEmail();
@@ -90,12 +105,14 @@ public class BucketController {
 			return "No New Email Found For BBH";
 		}
 		  for(String feedback:emails) {
-			//  try {
-				//  brokerService.loadFeedToS3(feedback,"source is Email");
+			  
+			 try {
+				 System.out.println("EMAIL feedback-->"+feedback);
+			  brokerService.loadFeedToS3(feedback,"");
 				  System.out.println(feedback);
-			//} catch (IOException e) {
-			//	log.error("Exception while processing tweets for upload",e.getMessage());
-			//}
+			} catch (IOException e) {
+				log.error("Exception while processing tweets for upload",e.getMessage());
+			}
 		  }
 		  return "Success";
 	}

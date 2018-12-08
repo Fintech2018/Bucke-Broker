@@ -25,12 +25,18 @@ public class TweetManager {
 			Query query = new Query(topic);
 			query.setLang("en");
 			QueryResult result;
+			int count=0;
 			do {
 				result = twitter.search(query);
 				List<Status> tweets = result.getTweets();
 				for (Status tweet : tweets) {
+					count++;
 					tweetList.add(tweet.getText());
+					if(count>=2) {
+						break;
+					}
 				}
+				
 			} while ((query = result.nextQuery()) != null);
 		} catch (TwitterException te) {
 			te.printStackTrace();

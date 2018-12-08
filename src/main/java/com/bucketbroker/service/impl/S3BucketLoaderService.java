@@ -19,12 +19,12 @@ import com.bucketbroker.utility.CredentialUtility;
 @Service(value="s3BucketLoaderService")
 public class S3BucketLoaderService implements BrokerService {
 	private static final String bucketName = "fintech-s3-uploadfb-lambda-trigger";
-	
+	//private static final String bucketName = "lambda-comprehend-sentiment";
 	@Override
 	public String loadSystemGeneratedFeedbackToS3(String feedbackType) {
 	try {
 		 AmazonS3 s3=CredentialUtility.getAWSS3Client();
-		 String key = "Sys_gen_sampl"+ UUID.randomUUID();
+		 String key = "Sys_gen_sampl"+ UUID.randomUUID()+".txt";
 		 System.out.println("Uploading a new object to S3 from a file\n");
          s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile(feedbackType)));
          
@@ -80,7 +80,7 @@ public class S3BucketLoaderService implements BrokerService {
 	public String loadFeedbackToS3(File fileToLoad) {
 	try {
 		 AmazonS3 s3=CredentialUtility.getAWSS3Client();
-		 String key = "Usr_file_sampl"+ UUID.randomUUID();
+		 String key = "Usr_file_sampl"+ UUID.randomUUID()+".txt";
 		 System.out.println("Uploading a new object to S3 from a file\n");
          s3.putObject(new PutObjectRequest(bucketName, key, fileToLoad));
          
@@ -112,7 +112,7 @@ public class S3BucketLoaderService implements BrokerService {
     	Writer writer=null;
    	try {
    		 AmazonS3 s3=CredentialUtility.getAWSS3Client();
-   		 String key = "Usr_feed_sampl"+ UUID.randomUUID();
+   		 String key = "Usr_feed_sampl"+ UUID.randomUUID()+".txt";
    		 
    		//Create File object to load
    		 File feedbackFile=File.createTempFile("aws-java-sdk-", ".txt");
@@ -155,7 +155,7 @@ public class S3BucketLoaderService implements BrokerService {
     	Writer writer=null;
    	try {
    		 AmazonS3 s3=CredentialUtility.getAWSS3Client();
-   		 String key = "Usr_feed_sampl"+ UUID.randomUUID();
+   		 String key = "Usr_feed_sampl"+ UUID.randomUUID()+".txt";
    		 
    		//Create File object to load
    		 File feedbackFile=File.createTempFile("aws-java-sdk-", ".txt");

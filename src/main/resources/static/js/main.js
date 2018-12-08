@@ -201,7 +201,8 @@ function fire_ajax_fileUpload_submit() {
         });
         $.ajax({
             type: "GET",
-            url: "/broker/storage/sync_twitter",
+            //url: "/broker/storage/uploadFile/sync_twitter",
+            url:"jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/sync_twitter?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
             success: function (data) {
          	   if(data=="Success"){
                     console.log("SUCCESS : ", data);
@@ -229,7 +230,8 @@ function fire_ajax_fileUpload_submit() {
         });
         $.ajax({
             type: "GET",
-            url: "/broker/storage/sync_email",
+            //url: "/broker/storage/uploadFile/sync_email",
+            url:"jdjoydeepde-eval-test.apigee.net/reviewfeedbackproxy/sync_email?apikey=QclhCTGbH2XgFiotkytQr33vKJdAOvQJ",
             success: function (data) {
          	   if(data=="Success"){
                     console.log("SUCCESS : ", data);
