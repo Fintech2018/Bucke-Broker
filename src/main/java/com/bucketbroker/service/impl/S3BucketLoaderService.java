@@ -15,6 +15,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.bucketbroker.service.intf.BrokerService;
 import com.bucketbroker.utility.CredentialUtility;
+import com.bucketbroker.utility.Utility;
 
 @Service(value="s3BucketLoaderService")
 public class S3BucketLoaderService implements BrokerService {
@@ -65,11 +66,11 @@ public class S3BucketLoaderService implements BrokerService {
         Writer writer = new OutputStreamWriter(new FileOutputStream(file));
         
         if("positive".equalsIgnoreCase(feedbackType)) {
-        	writer.write("I like this product... BBH You are awesome\n");
+        	writer.write(Utility.positiveFB);
         }else if("negative".equalsIgnoreCase(feedbackType)) {
-        	writer.write("I don't like this product... BBH You are horrible\n");
+        	writer.write(Utility.negativeFB);
         }else if("neutral".equalsIgnoreCase(feedbackType)) {
-        	writer.write("BBH is estabalished in 1958 and since then it has gone step by step\n");
+        	writer.write(Utility.neutralFB);
         }
         writer.close();
 

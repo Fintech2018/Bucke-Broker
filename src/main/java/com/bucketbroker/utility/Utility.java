@@ -25,4 +25,20 @@ public class Utility {
 	
     public static String  emailTwo = "Reviewer is Ana Mantes, Date 10/15/2017, state New York, source is email" + "\r\n"
 	+"I was contacted for Custody Service, associate provided detailed helpful infomration, i am very happy on their provided service, i see they are one of the biggest player in the market and been in business for years, service charges are also minimal, services offered in different channels(online, robo-advisor technology, in person).";
+
+    public static String  positiveFB ="Reviewer is Ana Patricia,	Date is 10/01/2016, state is New York, source is positve-feedback ,"+"\r\n"
+    		+ "I was contacted for Investment Advisory, associate provided detailed helpful infomration, i am very happy on their provided service, i see they are one of the biggest player in the market and been in business for years, service charges are also minimual, services offered in different channels(online, robo-advisor technology & in person)";
+
+    public static String  negativeFB ="Reviewer is Oprah Winfrey, date	10/11/2016,	state is New Jersey, source is negative-feedback ,"+"\r\n"
+    		+ "I was contacted for Fund Administration, associates not have expertise in managing risk and complexity, and don't use latest technolgoy to support clients, i also came to you know that they don't  have  accurate safekeeping and reporting of  funds and asset types, i am not happy on their Offering and services.";
+   
+    public static String  neutralFB ="Reviewer is Oprah Winfrey, date	10/11/2016,	state is Texas, source is neutral-feedback ,"+"\r\n"
+    		+ "ABC company is estabalished in 1958 and since then it has gone step by step.";
+    
+    public static String  headerFB ="Reviewer is Oprah Winfrey, date	10/11/2016,	state is Texas, source is submit-feedback ,"+"\r\n";
+    
+
+
+    
+    
 }

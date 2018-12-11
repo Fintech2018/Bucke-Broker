@@ -61,8 +61,8 @@ public class BucketController {
 	
 	@PostMapping("/uploadFile/feedback")
 	public String uploadFileToS3(@RequestParam("feedback") String userFeedback) throws IOException {
-		log.info("In feedback upload to S3 controller..");
-		return brokerService.loadFeedbackToS3(userFeedback);
+		log.info("In feedback upload to S3 controller..");		
+		return brokerService.loadFeedbackToS3(Utility.headerFB+userFeedback);
 	}
 	
 	@GetMapping("/uploadFile/sync_twitter")
