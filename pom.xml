@@ -62,6 +62,13 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.11.438</version>
 		</dependency>
+		
+		<dependency> 
+          <groupId>com.amazonaws</groupId> 
+          <artifactId>aws-java-sdk-translate</artifactId> 
+          <version>1.11.438</version> 
+        </dependency>
+		
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
