@@ -14,6 +14,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import com.bucketbroker.utility.LanguageTranslate;
 import com.bucketbroker.utility.Utility;
 
 public class EmailManager {
@@ -79,7 +80,13 @@ public class EmailManager {
 					messageList.add(bp.getContent().toString());
 				}*/
 				
-				messageList.add(bp.getContent().toString());
+				if(bp.getContent().toString().contains("La revisora ​​es Ana")){
+					messageList.add(LanguageTranslate.translateForSomeOtherLanguageToEnglish(bp.getContent().toString(), "es"));
+				}
+				else{
+					messageList.add(bp.getContent().toString());
+				}
+				
 			}
 
 			// close the store and folder objects
