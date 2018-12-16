@@ -80,7 +80,7 @@ public class EmailManager {
 					messageList.add(bp.getContent().toString());
 				}*/
 				
-				if(bp.getContent().toString().contains("La revisora ​​es Ana")){
+				if(bp.getContent().toString().contains("La revisora")){
 					messageList.add(LanguageTranslate.translateForSomeOtherLanguageToEnglish(bp.getContent().toString(), "es"));
 				}
 				else{
