@@ -14,6 +14,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import com.bucketbroker.utility.LanguageDetection;
 import com.bucketbroker.utility.LanguageTranslate;
 import com.bucketbroker.utility.Utility;
 
@@ -60,7 +61,9 @@ public class EmailManager {
 			// retrieve the messages from the folder in an array and print it
 			Message[] messages = emailFolder.getMessages();
 			System.out.println("messages.length---" + messages.length);
-
+			String bodyEmail = null;
+            String originalLanguage = null;
+			
 			for (int i = 0, n = messages.length; i < n; i++) {
 				Message message = messages[i];
 
@@ -80,12 +83,18 @@ public class EmailManager {
 					messageList.add(bp.getContent().toString());
 				}*/
 				
-				if(bp.getContent().toString().contains("La revisora")){
-					messageList.add(LanguageTranslate.translateForSomeOtherLanguageToEnglish(bp.getContent().toString(), "es"));
+				bodyEmail=bp.getContent().toString();
+				
+				if(!bodyEmail.contains("javax.mail.internet.MimeMultipart")){
+					originalLanguage = LanguageDetection.languageDetector(bodyEmail);
+					if("en".equals(originalLanguage)){
+						messageList.add(bodyEmail);
+					}else{
+						messageList.add(LanguageTranslate.translateForSomeOtherLanguageToEnglish(bodyEmail, originalLanguage));
+					}
 				}
-				else{
-					messageList.add(bp.getContent().toString());
-				}
+						
+					
 				
 			}
 
@@ -96,8 +105,8 @@ public class EmailManager {
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("EMAIl EXCEPTION BLOCK");
-			messageList.add(Utility.emailOne);
-			messageList.add(Utility.emailTwo);
+			//messageList.add(Utility.emailOne);
+			//messageList.add(Utility.emailTwo);
 		}
 		return messageList;
 	}

@@ -1,20 +1,27 @@
 package com.bucketbroker.utility;
-//import org.apache.tika.language.detect.LanguageDetector; 
-//import org.apache.tika.language.detect.LanguageResult; 
-
 
 //import org.apache.tika.exception.TikaException;
 //import org.apache.tika.language.LanguageIdentifier;
-//import org.xml.sax.SAXException;
+
 
 public class LanguageDetection {
  
-	public void languageDetector(String text){
-	/*
-	  LanguageDetector detector = LanguageDetector.getDefaultLanguageDetector(); 
-	  LanguageResult result = detector.detect("Alla människor är födda fria och lika i värde och rättigheter."); 
-	  System.out.println(result.getLanguage()); 
-      return result.getLanguage(); */
+	/*public  static String languageDetector(String text){
+		  LanguageIdentifier identifier = new LanguageIdentifier(text);
+	      String language = identifier.getLanguage();
+	      System.out.println("Language of the given content is : " + language);
+	      return language;
+	      
+   }*/
+	
+	
+	public  static String languageDetector(String text){
+	    if(text.contains("La revisora"))  
+		   return "es";
+	    else
+	       return "en";
+	      
    }
-   
+	
+   //javax.mail.internet.MimeMultipart
 }
