@@ -30,7 +30,7 @@ public class Utility {
     		+ "I was contacted for Fund Administration, associates not have expertise in managing risk and complexity, and don't use latest technolgoy to support clients, i also came to you know that they don't  have  accurate safekeeping and reporting of  funds and asset types, i am not happy on their Offering and services.";
     
     public static String  headerFB ="Reviewer is Ana Patricia,	Date is 10/01/2016, state is New Jersey, source is submitt_feedback ,"+"\r\n"
-   + "I was contacted for Investment Advisory, associate provided detailed helpful infomration, i am very happy on their provided service, i see they are one of the biggest player in the market and been in business for years, service charges are also minimual, services offered in different channels(online, robo-advisor technology & in person).";
+   + "I was contacted for Investment Advisory, associate provided detailed helpful information, i am very happy on their provided service, i see they are one of the biggest player in the market and been in business for years, service charges are also minimual, services offered in different channels(online, robo-advisor technology & in person).";
 
 
     
