@@ -68,7 +68,7 @@ public class BucketController {
 	@GetMapping("/uploadFile/sync_twitter")
 	public String syncTwitter() {
 		log.info("In sync twitter controller....");
-		List<String> tweets=TweetManager.getTweets("BBH PRIVATE BANKING");
+		List<String> tweets=TweetManager.getTweets("BBH");
 		if(tweets!=null && tweets.isEmpty()) {
 			return "No New Tweets Found For BBH";
 		}
@@ -93,6 +93,10 @@ public class BucketController {
 				log.error("Exception while processing tweets for upload",e.getMessage());
 			}
 			  t++;
+			  
+			  if(t>2){
+				  break;
+			  } 
 		  }
 		  return "Success";
 	}
