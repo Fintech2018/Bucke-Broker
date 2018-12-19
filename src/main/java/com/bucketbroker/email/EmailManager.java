@@ -3,20 +3,15 @@ package com.bucketbroker.email;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
-
-import com.bucketbroker.utility.LanguageDetection;
 import com.bucketbroker.utility.LanguageTranslate;
-import com.bucketbroker.utility.Utility;
+
 
 public class EmailManager {
 	
@@ -25,6 +20,12 @@ public class EmailManager {
 	static String username = "fintechfeedback@gmail.com";// change accordingly
 	static String password = "fintech2018";// change accordingly
 
+	
+	/*public static void main(String[] args) {
+		syncEmail();
+	}*/
+	
+	
 	public static List<String> syncEmail() {
 		
 		return check(host, mailStoreType, username, password);
@@ -79,24 +80,14 @@ public class EmailManager {
 				System.out.println("Received Date:" + message.getReceivedDate());*/
 				System.out.println("Text: " + bp.getContent().toString());
 				
-				/*if(message.getSubject().contains("BBH")) {
-					messageList.add(bp.getContent().toString());
-				}*/
 				
 				bodyEmail=bp.getContent().toString();
 				
 				if(!bodyEmail.contains("javax.mail.internet.MimeMultipart")){
-					originalLanguage = LanguageDetection.languageDetector(bodyEmail);
-					if("en".equals(originalLanguage)){
-						messageList.add(bodyEmail);
-					}else{
-						messageList.add(LanguageTranslate.translateForSomeOtherLanguageToEnglish(bodyEmail, originalLanguage));
-					}
+					messageList.add(LanguageTranslate.translateForSomeOtherLanguageToEnglish(bodyEmail));
 				}
 						
-					
-				
-			}
+		  }
 
 			// close the store and folder objects
 			emailFolder.close(false);
