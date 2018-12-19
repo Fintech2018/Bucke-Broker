@@ -10,10 +10,12 @@ import com.amazonaws.services.translate.model.TranslateTextResult;
 public class LanguageTranslate {
     private static final String REGION = "us-east-2";
 
+    /*
     public static void main(String[] args) {
     	String sourceText= "El revisor es Ana Patricia, fecha 15/10/2016 ,Estado de Nueva Jersey, la fuente es el correo electronico ,Me contactaron para la administracion del fondo, el asociado proporciono informacion util detallada, estoy muy contento con el servicio prestado, veo que es uno de los mayores jugadores en el mercado y ha estado en el negocio durante anos, cargos de servicio tambien son mini , los servicios ofrecidos en diferentes canales (en linea, tecnologia robo-consejero, en persona).";
     	translateForSomeOtherLanguageToEnglish(sourceText);
 	}
+	*/
     
    public static String translateForSomeOtherLanguageToEnglish(String languageWholeTextToTranslate){
     AmazonTranslate translate = AmazonTranslateClient.builder()
